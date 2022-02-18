@@ -24,6 +24,9 @@ LABEL maintainer='Hem Chandra Padhalni'
 LABEL version='0.0.1'
 # This is investigation on deepaas from corestack
 
+# default is python3 now
+ARG pyVer=python3
+
 # What user branch to clone [!]
 ARG branch=master
 
@@ -39,20 +42,22 @@ ARG oneclient_ver=19.02.0.rc2-1~bionic
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
          git \
+         graphviz \
          curl \
          wget \
-         python3-setuptools \
-         python3-pip \
-         python3-wheel && \ 
+         $pyVer-setuptools \
+         $pyVer-pip \
+         $pyVer-dev \
+         $pyVer-wheel && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /root/.cache/pip/* && \
     rm -rf /tmp/* && \
-    if [ ! -e /usr/bin/pip ]; then \
-       ln -s /usr/bin/pip3 /usr/bin/pip; \
-    fi; \
-    if [ ! -e /usr/bin/python ]; then \
-       ln -s /usr/bin/python3 /usr/bin/python; \
+    if [ "$pyVer" = "python3" ] ; then \
+       ln -s /usr/bin/pip3 /usr/bin/pip && \
+       if [ ! -e /usr/bin/python ]; then \
+          ln -s /usr/bin/python3 /usr/bin/python; \
+       fi; \
     fi && \
     python --version && \
     pip --version
