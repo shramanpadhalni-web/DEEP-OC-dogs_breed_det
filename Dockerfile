@@ -16,7 +16,8 @@
 ARG tag=1.14.0-py3
 
 # Base image, e.g. tensorflow/tensorflow:1.14.0-py3
-FROM tensorflow/tensorflow:${tag}
+# FROM tensorflow/tensorflow:${tag}
+FROM deephdc/tensorflow:${tag}
 
 LABEL maintainer='Hem Chandra Padhalni'
 LABEL version='0.0.1'
