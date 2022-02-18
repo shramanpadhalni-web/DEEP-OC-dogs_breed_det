@@ -4,13 +4,19 @@ version: '2.3'
 # do not forget '--service-ports'!
 
 services:
+
+    dogs_breed_det-cpu:
+      image: shramanpadhalni-web/deep-oc-dogs_breed_det:cpu
+      ports:
+        - 5000:5000
+      entrypoint: [ "deepaas-run", "--listen-ip=0.0.0.0" ]
+
     dogs_breed_det:
       image: shramanpadhalni-web/deep-oc-dogs_breed_det
       ports:
         - 5000:5000
         - 6006:6006
       entrypoint: ["deepaas-run", "--listen-ip=0.0.0.0"]
-
 
     dogs_breed_det-gpu:
       image: shramanpadhalni-web/deep-oc-dogs_breed_det:gpu
@@ -20,6 +26,19 @@ services:
         - 6006:6006
       entrypoint: ["deepaas-run", "--listen-ip=0.0.0.0"]
 
+    dogs_breed_det-cpu-local:
+      extends:
+        service: dogs_breed_det-cpu
+      volumes:
+        - $HOME/datasets/dogs_breed/data:/srv/dogs_breed_det/data
+        - $HOME/datasets/dogs_breed/models:/srv/dogs_breed_det/models
+
+    dogs_breed_det-gpu-local:
+      extends:
+        service: dogs_breed_det-gpu
+      volumes:
+        - $HOME/datasets/dogs_breed/data:/srv/dogs_breed_det/data
+        - $HOME/datasets/dogs_breed/models:/srv/dogs_breed_det/models
 
     dogs_breed_det-rclone:
       extends:
