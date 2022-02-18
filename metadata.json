@@ -1,0 +1,38 @@
+{
+    "title": "dogs_breed_det",
+    "summary": "This is investigation on deepaas from corestack",
+    "description": [
+		"This is dogs_breed_det application using DEEPaaS API",
+           "",
+           "**References**\n",
+           ""
+	],
+    "keywords": [
+        "docker",
+        "api-v2"
+    ],
+    "license": "No license file",
+    "date_creation": "2022-02-18",
+    "sources": {
+		"dockerfile_repo": "https://github.com/shramanpadhalni-web/DEEP-OC-dogs_breed_det",
+		"docker_registry_repo": "shramanpadhalni-web/deep-oc-dogs_breed_det",
+		"code": "https://github.com/shramanpadhalni-web/dogs_breed_det"
+	},
+    "continuous_integration": {
+        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-dogs_breed_det/master",
+        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-dogs_breed_det/job/master"
+    },
+    "tosca": [
+        {
+            "title": "Mesos (CPU)",
+            "url": "https://raw.githubusercontent.com/indigo-dc/tosca-templates/master/deep-oc/deep-oc-marathon-webdav.yml",
+            "inputs": [
+                "rclone_conf",
+                "rclone_url",
+                "rclone_vendor",
+                "rclone_user",
+                "rclone_pass"
+            ]
+        }
+    ]
+}
